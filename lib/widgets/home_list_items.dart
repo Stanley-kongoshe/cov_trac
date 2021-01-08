@@ -6,12 +6,13 @@ class HomeList extends StatelessWidget {
     Icons.info,
   );
 
-  final List<String> homeList = [
-    'Testing Centers',
-    'Precautions',
-    'Testing Procedures',
-    'Covid-19 Education'
-  ];
+  final Map homeList = {
+    'Testing Centers': '/testing_centre',
+    'Precautions': '/precautions',
+    'Testing Procedures': '/testing_procedures',
+    'Covid-19 Education': '/covid19_education',
+    'Covid-19 Statistics': '/stats'
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +24,11 @@ class HomeList extends StatelessWidget {
       child: ListView.builder(
         itemCount: homeList.length,
         itemBuilder: (BuildContext context, int index) {
+          String key = homeList.keys.elementAt(index);
           return GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, homeList[key]);
+            },
             child: Container(
               height: 60.0,
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -37,7 +41,7 @@ class HomeList extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    homeList[index],
+                    key,
                     style: TextStyle(
                       fontSize: 23.0,
                       fontWeight: FontWeight.w400,
